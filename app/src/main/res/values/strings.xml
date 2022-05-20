@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">BBC</string>
+    <string name="title_home">Home</string>
+    <string name="title_MyAccount">My Account</string>
+    <string name="title_search">Search</string>
+</resources>
