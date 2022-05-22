@@ -17,5 +17,5 @@ class SPLASHSCREEN : AppCompatActivity() {
             finish()
         },2000)
     }
-    }
+
 }
