@@ -37,7 +37,7 @@ class Login : AppCompatActivity() {
     fun GotoMain(view: View) {
         val email = findViewById<TextInputEditText>(R.id.email_login).text.toString()
         val password = findViewById<TextInputEditText>(R.id.password_login).text.toString()
-        Firebase.auth.createUserWithEmailAndPassword(email, password)
+        Firebase.auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val i = Intent(this, MainActivity::class.java)

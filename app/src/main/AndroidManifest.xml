@@ -16,6 +16,9 @@
         android:theme="@style/Theme.BBC"
         tools:targetApi="31">
         <activity
+            android:name=".SPLASHSCREEN"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity

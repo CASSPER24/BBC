@@ -38,7 +38,7 @@ class Register : AppCompatActivity() {
         val confirm_password =
             findViewById<TextInputEditText>(R.id.password_register_confirm).text.toString()
         if (password == confirm_password) {
-            Firebase.auth.signInWithEmailAndPassword(email, password)
+            Firebase.auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val i = Intent(this, MainActivity::class.java)
@@ -52,8 +52,8 @@ class Register : AppCompatActivity() {
                         .show()
                 }
         } else {
-            Toast.makeText(applicationContext, "Passwords don't match", Toast.LENGTH_LONG)
-
+            val toast = Toast.makeText(applicationContext, "Passwords don't match", Toast.LENGTH_LONG)
+            toast.show()
         }
     }
 
