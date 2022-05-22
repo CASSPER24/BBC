@@ -3,8 +3,14 @@ package com.ayesigyederrick.bbc
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,5 +33,20 @@ class Login : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+    fun GotoMain(view: View) {
+        val email = findViewById<TextInputEditText>(R.id.email_login).text.toString()
+        val password = findViewById<TextInputEditText>(R.id.password_login).text.toString()
+        Firebase.auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val i = Intent(this, MainActivity::class.java)
+                    startActivity(i)
+                    //finish()
+                }
+            }.addOnFailureListener { exception ->
+                Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
+
+            }
     }
 }

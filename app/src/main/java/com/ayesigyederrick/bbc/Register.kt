@@ -31,11 +31,13 @@ class Register : AppCompatActivity() {
             startActivity(intent_2)
         }
 
-        fun btnRegister(view: View) {
-            val email = findViewById<TextInputEditText>(R.id.email_register).text.toString()
-            val password = findViewById<TextInputEditText>(R.id.password_register).text.toString()
-            val confirm_password = findViewById<TextInputEditText>(R.id.password_register_confirm).text.toString()
-            if(password == confirm_password){
+    }
+    fun btnRegister(view: View) {
+        val email = findViewById<TextInputEditText>(R.id.email_register).text.toString()
+        val password = findViewById<TextInputEditText>(R.id.password_register).text.toString()
+        val confirm_password =
+            findViewById<TextInputEditText>(R.id.password_register_confirm).text.toString()
+        if (password == confirm_password) {
             Firebase.auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -44,13 +46,15 @@ class Register : AppCompatActivity() {
                         finish()
                     }
                 }.addOnFailureListener { exception ->
-                    Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG)
+                    Toast.makeText(applicationContext,
+                        exception.localizedMessage,
+                        Toast.LENGTH_LONG)
                         .show()
                 }
-        }else{
-            Toast.makeText(applicationContext,"Passwords don't match",Toast.LENGTH_LONG)
+        } else {
+            Toast.makeText(applicationContext, "Passwords don't match", Toast.LENGTH_LONG)
 
-            }        }
+        }
     }
 
     }
