@@ -42,7 +42,7 @@ class Login : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val i = Intent(this, MainActivity::class.java)
                     startActivity(i)
-                    //finish()
+                    finish()
                 }
             }.addOnFailureListener { exception ->
                 Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
