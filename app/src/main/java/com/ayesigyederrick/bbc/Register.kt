@@ -35,9 +35,11 @@ class Register : AppCompatActivity() {
     fun btnRegister(view: View) {
         val email = findViewById<TextInputEditText>(R.id.email_register).text.toString()
         val password = findViewById<TextInputEditText>(R.id.password_register).text.toString()
-        val confirm_password =
-            findViewById<TextInputEditText>(R.id.password_register_confirm).text.toString()
-        if (password == confirm_password) {
+        val confirm_password = findViewById<TextInputEditText>(R.id.password_register_confirm).text.toString()
+
+        if (password =="" || confirm_password == "" || email == ""){
+            Toast.makeText(applicationContext, "No field should be left Empty", Toast.LENGTH_LONG).show()
+        }else if (password == confirm_password) {
             Firebase.auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
