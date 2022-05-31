@@ -37,16 +37,21 @@ class Login : AppCompatActivity() {
     fun GotoMain(view: View) {
         val email = findViewById<TextInputEditText>(R.id.email_login).text.toString()
         val password = findViewById<TextInputEditText>(R.id.password_login).text.toString()
-        Firebase.auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val i = Intent(this, MainActivity::class.java)
-                    startActivity(i)
-                    finish()
+        if(email =="" || password == ""){
+            Toast.makeText(applicationContext, "Fields cant be left Empty, Press Skip or go to Register to open an Account", Toast.LENGTH_LONG).show()
+        }else {
+            Firebase.auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val i = Intent(this, MainActivity::class.java)
+                        startActivity(i)
+                        finish()
+                    }
+                }.addOnFailureListener { exception ->
+                    Toast.makeText(applicationContext,
+                        exception.localizedMessage,
+                        Toast.LENGTH_LONG).show()
                 }
-            }.addOnFailureListener { exception ->
-                Toast.makeText(applicationContext, exception.localizedMessage, Toast.LENGTH_LONG).show()
-
-            }
+        }
     }
 }
