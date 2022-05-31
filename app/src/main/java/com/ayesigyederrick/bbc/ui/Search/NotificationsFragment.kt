@@ -1,9 +1,7 @@
 package com.ayesigyederrick.bbc.ui.Search
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
@@ -53,6 +51,17 @@ class NotificationsFragment : Fragment() {
         myWebViewnotifications.settings.allowContentAccess = true
         myWebViewnotifications.settings.domStorageEnabled = true
         myWebViewnotifications.settings.useWideViewPort = true
+
+        myWebViewnotifications.canGoBack()
+        myWebViewnotifications.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == MotionEvent.ACTION_UP && myWebViewnotifications.canGoBack()) {
+                    myWebViewnotifications.goBack()
+                    return true
+                }
+                return false
+            }
+        })
 
     }
 }
