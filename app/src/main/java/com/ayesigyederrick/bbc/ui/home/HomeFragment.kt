@@ -1,12 +1,11 @@
 package com.ayesigyederrick.bbc.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ayesigyederrick.bbc.R
@@ -34,7 +33,7 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val myWebViewhome: WebView = view.findViewById(R.id.home_webview)
         //WebViewClient that override the shouldOverrideUrlLoading() method.
         myWebViewhome.webViewClient = object : WebViewClient() {
@@ -53,6 +52,19 @@ class HomeFragment : Fragment() {
         myWebViewhome.settings.allowContentAccess = true
         myWebViewhome.settings.domStorageEnabled = true
         myWebViewhome.settings.useWideViewPort = true
+
+
+        myWebViewhome.canGoBack()
+        myWebViewhome.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == MotionEvent.ACTION_UP && myWebViewhome.canGoBack()) {
+                    myWebViewhome.goBack()
+                    return true
+                }
+                return false
+            }
+        })
+
 
     }
 }
